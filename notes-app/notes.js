@@ -6,7 +6,7 @@ export const addNote = (title, body) =>{
     const notes = loadNotes();
     const duplicateNotes = notes.filter((note)=>note.title === title)
 
-    if(duplicateNotes.length = 0){
+    if(duplicateNotes.length === 0){
         notes.push({
             title: title,
             body: body
@@ -15,7 +15,17 @@ export const addNote = (title, body) =>{
     } else{
         console.log('note title already exists')
     }
+}
 
+export const removeNote = (title)=> {
+    const notes = loadNotes();
+    const noteIndex = notes.findIndex((note)=>note.title === title);
+    if(noteIndex !== -1){
+        notes.splice(noteIndex, 1)
+        saveNotes(notes)
+    } else{
+        console.log('such title doesnt exists')
+    }
 }
 
 const saveNotes = (notes)=>{
