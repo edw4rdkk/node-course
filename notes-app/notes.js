@@ -1,4 +1,5 @@
 import fs from 'fs'
+import chalk from 'chalk';
 
 export const getNotes = () => 'Your notes...'
 
@@ -13,7 +14,7 @@ export const addNote = (title, body) =>{
         })
         saveNotes(notes)
     } else{
-        console.log('note title already exists')
+        console.log(chalk.bold.red('note title already exists'))
     }
 }
 
@@ -23,9 +24,18 @@ export const removeNote = (title)=> {
     if(noteIndex !== -1){
         notes.splice(noteIndex, 1)
         saveNotes(notes)
+        console.log(chalk.bold.green('note removed'))
     } else{
-        console.log('such title doesnt exists')
+        console.log(chalk.bold.red('such title doesnt exists'))
     }
+}
+
+export const listNotes = () => {
+    console.log(chalk.green.bold('your notes...'))
+    const notes = loadNotes();
+    notes.forEach((note) => {
+        console.log(note.title)
+    });
 }
 
 const saveNotes = (notes)=>{
