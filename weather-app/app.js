@@ -1,4 +1,5 @@
 import request from 'request'
+import { geocode } from './utils/geocode'
 
 const url = 'https://api.weatherstack.com/current?access_key=17a911fce50765313671cede79dba549&query=Kyiv'
 
@@ -20,7 +21,7 @@ const urlGeocoding = 'https://api.api-ninjas.com/v1/geocoding?city=Kyiv'
 request({url: urlGeocoding, headers: {'X-Api-Key': 'BYlSI+tEKe67k/9pKkM9UQ==5ZjYrhvUW5dwfuG8'},
  json: true}, (error, response) => {
     if (error) {
-        console.log('unable to connect to weather service')
+        console.log('unable to connect to location service')
     } else if (response.body.error) {
         console.log('no matching results')
     } else {
@@ -30,3 +31,8 @@ request({url: urlGeocoding, headers: {'X-Api-Key': 'BYlSI+tEKe67k/9pKkM9UQ==5ZjY
     const longitude = city.longitude;
     console.log(latitude, longitude)
  }})
+
+geocode('Kyiv', (error, data) => {
+    console.log('Error', error)
+    console.log('data', data)
+})
