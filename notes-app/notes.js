@@ -1,8 +1,6 @@
 import fs from 'fs'
 import chalk from 'chalk';
 
-export const getNotes = () => 'Your notes...'
-
 export const addNote = (title, body) =>{
     const notes = loadNotes();
     const duplicateNotes = notes.filter((note)=>note.title === title)
@@ -36,6 +34,15 @@ export const listNotes = () => {
     notes.forEach((note) => {
         console.log(note.title)
     });
+}
+
+export const readNote = (title, body) => {
+    const notes = loadNotes();
+    const myNote = notes.find((note) => note.title === title)
+    if(myNote) {
+        console.log(chalk.green.bold(myNote.title))
+        console.log(myNote.body)
+    } else console.log(chalk.bold.red("such note doesnt exist"))
 }
 
 const saveNotes = (notes)=>{

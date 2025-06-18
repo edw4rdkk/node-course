@@ -21,3 +21,5 @@ const newDataJson = JSON.stringify(dataJSON)
 fs.writeFileSync('1-json.json', newDataJson)
 console.log(newDataJson)
 console.log(dataJSON)
+
+

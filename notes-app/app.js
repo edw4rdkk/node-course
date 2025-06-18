@@ -1,4 +1,4 @@
-import {getNotes, addNote, removeNote, listNotes} from './notes.js'
+import {addNote, removeNote, listNotes, readNote} from './notes.js'
 import chalk from 'chalk'
 import yargs from 'yargs'
 import {hideBin} from 'yargs/helpers'
@@ -42,6 +42,18 @@ yargs()
       listNotes();
     }
   })
-  .command('read', 'read a note', ()=>console.log('reading a note'))
+  .command({
+    command: 'read',
+    describe: 'read a note',
+    builder: {    
+      title:{
+        describe: 'note title',
+        demandOption: true, 
+        type: 'string'
+    }},
+    handler(argv) {
+      readNote(argv.title, argv.body)
+    }
+  })
   .parse(hideBin(process.argv))
 
